@@ -6,8 +6,10 @@ import { routerRoot } from '../routes/home.router';
 import { routerV1 } from '../routes/v1/v1.router';
 
 const app = express();
+
 // Port to listen
 app.set('port', process.env.PORT || 3001);
+
 // Middlewires
 app.use(morgan('dev'));
 app.use('/', routerRoot); // Route to Home
