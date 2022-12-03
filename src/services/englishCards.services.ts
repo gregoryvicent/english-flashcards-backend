@@ -6,8 +6,8 @@ class EnglishCards {
   public async createCard(word: string) {
     await Flashcard.sync()
     const newCard = await Flashcard.create({
-      englishWord: 'Orange',
-      spanishWord: 'Naranja',
+      englishWord: 'Wine',
+      spanishWord: 'Vino',
     });
     return {
       message: 'success',
