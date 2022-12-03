@@ -16,19 +16,20 @@ abstract class DataBaseConnection {
   private dbPassword: string = <string>DB_PASSWORD;
   private dbPort: number = parseInt(<string>DB_PORT);
   private dbType: Dialect = 'mysql';
-  private sequelize: Sequelize | undefined = undefined;
+  private sequelize: Sequelize;
 
   constructor() {
+    // Here We use sequelize as ORM
     this.sequelize = new Sequelize(this.dbName, this.dbUser, this.dbPassword, {
       host: this.dbHost,
       dialect: this.dbType,
       port: this.dbPort,
     });
   }
-
+  // This method is just to connection test to the database
   async isConnected() {
     try {
-      if (typeof this.sequelize === 'undefined')
+      if (this.sequelize === undefined)
         throw new Error('Sequelize is undefined');
       await this.sequelize.authenticate();
       console.info('All Fine !!!!!');
@@ -36,6 +37,10 @@ abstract class DataBaseConnection {
       console.info('Bad Connection !!!!!');
       console.error(err);
     }
+  }
+
+  createModel() {
+    return this.sequelize;
   }
 }
 

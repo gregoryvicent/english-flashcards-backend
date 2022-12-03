@@ -1,3 +1,4 @@
+// Data needed to connect to the database
 import * as dotenv from 'dotenv';
 
 dotenv.config();

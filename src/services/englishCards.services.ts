@@ -1,4 +1,5 @@
 import { DataBaseConnection } from '../classes/dataBaseConnection.class';
+import { Flashcard } from '../models/flashcards.model';
 
 // This class has all operations to work with the english cards data on the database
 class EnglishCards extends DataBaseConnection {
@@ -10,18 +11,25 @@ class EnglishCards extends DataBaseConnection {
   }
 
   public static newConnection() {
-    if(this.instanceEnglishCards === null) {
-      this.instanceEnglishCards = new EnglishCards();
-      return this.instanceEnglishCards;
+    if (EnglishCards.instanceEnglishCards === null) {
+      EnglishCards.instanceEnglishCards = new EnglishCards();
+      return EnglishCards.instanceEnglishCards;
     }
-    return this.instanceEnglishCards;
+    return EnglishCards.instanceEnglishCards;
   }
   // Created a new card
-  public createCard(word: string) {} // Remember to declare a type to the methods
+  public async createCard(word: string) {
+    const newCard = await Flashcard.create({
+      englishWord: 'Cat',
+      spanishWord: 'Gato',
+    });
+    return {
+      message: 'success',
+      model: newCard
+    };
+  } // Remember to declare a type to the methods
   // Get all cards and return them
-  public getAllCards() {
-    this.isConnected();
-  }
+  public getAllCards() {}
   // Get one card and return it
   public getOnceCard() {}
   // Delete one card

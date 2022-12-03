@@ -13,12 +13,14 @@ const englishCards = EnglishCards.newConnection();
 // GET Method to get all cards
 routerV1.get('/', (req, res) => {
   res.send('This is the v1');
-  englishCards.getAllCards();
 });
 // GET Method to get one card
 routerV1.get('/', (req, res) => {});
 // POST Method to create a new card
-routerV1.post('/', (req, res) => {});
+routerV1.post('/', async (req, res) => {
+  const response = await englishCards.createCard("Hi");
+  res.json(response);
+});
 // DELETE Method to delete a card
 routerV1.delete('/', (req, res) => {});
 
