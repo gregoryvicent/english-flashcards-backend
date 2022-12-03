@@ -3,7 +3,7 @@ import express from 'express';
 import morgan from 'morgan';
 
 import { routerRoot } from '../routes/home.router';
-import { routerV1 } from '../routes/v1/v1.router';
+import { routerV1 } from '../routes/v1/flashcard.router';
 
 const app = express();
 

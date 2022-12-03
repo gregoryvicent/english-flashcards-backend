@@ -3,11 +3,11 @@ import { Flashcard } from '../models/flashcards.model';
 // This class has all operations to work with the english cards data on the database
 class EnglishCards {
   // Created a new card
-  public async createCard(word: string) {
-    await Flashcard.sync()
+  public async createCard(englishWord: string, spanishWord: string) {
+    await Flashcard.sync();
     const newCard = await Flashcard.create({
-      englishWord: 'Wine',
-      spanishWord: 'Vino',
+      englishWord: englishWord,
+      spanishWord: spanishWord,
     });
     return {
       message: 'success',
@@ -15,11 +15,28 @@ class EnglishCards {
     };
   } // Remember to declare a type to the methods
   // Get all cards and return them
-  public getAllCards() {}
+  public async getAllCards() {
+    const allFlashcards = await Flashcard.findAll();
+    return allFlashcards;
+  }
   // Get one card and return it
-  public getOnceCard() {}
+  public async getOnceCard(cardId: string) {
+    const oneFlashcard = await Flashcard.findAll({
+      where: {
+        id: cardId,
+      },
+    });
+    return oneFlashcard;
+  }
   // Delete one card
-  public deleteCard() {}
+  public async deleteCard(cardId: string) {
+    const deleteFlashcard = await Flashcard.destroy({
+      where: {
+        id: cardId,
+      },
+    });
+    return deleteFlashcard;
+  }
 }
 
 export { EnglishCards };
