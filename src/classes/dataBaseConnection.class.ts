@@ -16,7 +16,7 @@ abstract class DataBaseConnection {
   private dbPassword: string = <string>DB_PASSWORD;
   private dbPort: number = parseInt(<string>DB_PORT);
   private dbType: Dialect = 'mysql';
-  private sequelize: Sequelize;
+  protected sequelize: Sequelize;
 
   constructor() {
     // Here We use sequelize as ORM
@@ -27,7 +27,7 @@ abstract class DataBaseConnection {
     });
   }
   // This method is just to connection test to the database
-  async isConnected() {
+  public async isConnected() {
     try {
       if (this.sequelize === undefined)
         throw new Error('Sequelize is undefined');
@@ -37,10 +37,6 @@ abstract class DataBaseConnection {
       console.info('Bad Connection !!!!!');
       console.error(err);
     }
-  }
-
-  createModel() {
-    return this.sequelize;
   }
 }
 
