@@ -13,7 +13,7 @@ class EnglishCards {
     });
     return {
       message: 'success',
-      model: newCard,
+      body: newCard,
     };
   }
   // Get all cards and return them

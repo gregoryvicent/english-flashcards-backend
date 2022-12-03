@@ -23,7 +23,8 @@ routerV1.get('/flashcards/:id', async (req, res) => {
 });
 // POST Method to create a new card
 routerV1.post('/flashcards', async (req, res) => {
-  const response = await englishCards.createCard('Best', 'Mejor');
+  const { englishWord, spanishWord } = req.body
+  const response = await englishCards.createCard(englishWord, spanishWord);
   res.status(201).json(response);
 });
 // DELETE Method to delete a card

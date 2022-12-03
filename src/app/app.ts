@@ -12,6 +12,7 @@ app.set('port', process.env.PORT || 3001);
 
 // Middlewires
 app.use(morgan('dev'));
+app.use(express.json());
 app.use('/', routerRoot); // Route to Home
 app.use('/api/v1', routerV1); // Route to API version 1.0.0
 
