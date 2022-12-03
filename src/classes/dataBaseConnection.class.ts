@@ -9,14 +9,14 @@ import {
 } from '../config/db.config';
 
 // This class "DataBaseConnection" is responsible for making the connection to the database
-abstract class DataBaseConnection {
+class DataBaseConnection {
   private dbName: string = <string>DB_NAME;
   private dbUser: string = <string>DB_USER;
   private dbHost: string = <string>DB_HOST;
   private dbPassword: string = <string>DB_PASSWORD;
   private dbPort: number = parseInt(<string>DB_PORT);
   private dbType: Dialect = 'mysql';
-  protected sequelize: Sequelize;
+  public sequelize: Sequelize;
 
   constructor() {
     // Here We use sequelize as ORM

@@ -1,31 +1,55 @@
 // Model for the Flashcards table
+import {
+  Model,
+  DataTypes,
+  InferAttributes,
+  InferCreationAttributes,
+  CreationOptional,
+} from 'sequelize';
 import { DataBaseConnection } from '../classes/dataBaseConnection.class';
-import { DataTypes } from 'sequelize';
 
-// "FlashCardModel" inherits from "DataBaseConnection" to use the same database connection and It can use the property "this.sequelize".
-class FlashCardModel extends DataBaseConnection {
-  public createModel() {
-    const Flashcard = this.sequelize.define('Flashcard', {
-      englishWord: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      spanishWord: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      id: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
-        primaryKey: true,
-      },
-    });
-    return Flashcard;
-  }
+// We instance "DataBaseConnection" class to get the "sequelize" attribute.
+const dataBaseConnection: DataBaseConnection = new DataBaseConnection();
+
+// Here We Typing the Flashcard Model
+class Flashcard extends Model<
+  InferAttributes<Flashcard>,
+  InferCreationAttributes<Flashcard>
+> {
+  declare englishWord: string;
+  declare spanishWord: string;
+  declare id: CreationOptional<string>;
+  declare createdAt: CreationOptional<string>;
+  declare updatedAt: CreationOptional<string>;
 }
 
-// Here the class is instantiated to only export the "createModel()" method that contains what is necessary to work with this Flashcards model.
-const flashcard = new FlashCardModel();
-const Flashcard = flashcard.createModel();
+// Create Flashcard Model
+Flashcard.init(
+  {
+    englishWord: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    spanishWord: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+    },
+  },
+  {
+    sequelize: dataBaseConnection.sequelize, // Here We use the "sequelize" attribute.
+    modelName: 'Flashcard',
+  }
+);
 
 export { Flashcard };

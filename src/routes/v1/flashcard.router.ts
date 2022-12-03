@@ -17,20 +17,20 @@ routerV1.get('/flashcards', async (req, res) => {
 });
 // GET Method to get one card
 routerV1.get('/flashcards/:id', async (req, res) => {
-  const cardId: string = req.params.id
-  const flashcard = await englishCards.getOnceCard(cardId)
-  res.status(200).json(flashcard)
+  const cardId: string = req.params.id;
+  const flashcard = await englishCards.getOnceCard(cardId);
+  res.status(200).json(flashcard);
 });
 // POST Method to create a new card
 routerV1.post('/flashcards', async (req, res) => {
-  const response = await englishCards.createCard('Island', 'Isla');
+  const response = await englishCards.createCard('Best', 'Mejor');
   res.status(201).json(response);
 });
 // DELETE Method to delete a card
 routerV1.delete('/flashcards/:id', async (req, res) => {
-  const cardId: string = req.params.id
-  const flashcard: number = await englishCards.deleteCard(cardId)
-  res.status(204).json(flashcard);
+  const cardId: string = req.params.id;
+  const cardsRemoved: number = await englishCards.deleteCard(cardId);
+  res.status(204).json(cardsRemoved);
 });
 
 export { routerV1 };
